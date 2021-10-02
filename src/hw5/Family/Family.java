@@ -38,18 +38,11 @@ public class Family {
         if (index >= children.length || children[index] == null) {
             return false;
         } else {
-            int newArrLength = (children.length > 1) ? children.length - 1 : 1;
-            Human[] childrenNew = new Human[newArrLength];
-
-            if (index < newArrLength ) {
-                System.arraycopy(children, 0, childrenNew, 0, index );
-                System.arraycopy(children, index + 1, childrenNew, index -1, children.length - 1 - index);
-            } else
-                System.arraycopy(children, 0, childrenNew, 0, index);
-
-
-
-            children = childrenNew;
+            System.arraycopy(children, index + 1, children, index, children.length - 1 - index);
+            Human[] newChildren = new Human[children.length - 1];
+            newChildren = children;
+            children = null;
+            children = newChildren;
 
             return true;
         }

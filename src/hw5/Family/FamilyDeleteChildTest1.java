@@ -42,7 +42,7 @@ public class FamilyDeleteChildTest1 {
     @Test
     public void testDeleteChild() {
         System.out.println(Arrays.toString(module.getChildren()));
-        boolean isDeleted = module.deleteChild(1);
+        boolean isDeleted = module.deleteChild(2);
         Human[] freshChildren = module.getChildren();
         boolean remainedFirstElem = freshChildren[0].getName().equals("Kid1");
         boolean secondElemDeleted = freshChildren[1] == null;
