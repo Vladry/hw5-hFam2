@@ -1,4 +1,4 @@
-package hw4.Family;
+package hw5.Family;
 
 import java.util.Arrays;
 
@@ -35,15 +35,19 @@ public class Family {
     }
 
     public boolean deleteChild(int index) {
-        if ((index >= children.length || children[index] == null) || index > children.length - 1) {
+        if (index >= children.length || children[index] == null) {
             return false;
         } else {
-            int newArrLength = (children.length > 1)? children.length - 1 : 1;
+            int newArrLength = (children.length > 1) ? children.length - 1 : 1;
             Human[] childrenNew = new Human[newArrLength];
-            if (newArrLength > index) {
+
+            if (index < newArrLength ) {
+                System.arraycopy(children, 0, childrenNew, 0, index );
+                System.arraycopy(children, index + 1, childrenNew, index -1, children.length - 1 - index);
+            } else
                 System.arraycopy(children, 0, childrenNew, 0, index);
-            }
-                System.arraycopy(children, index + 1, childrenNew, index, children.length - 1 - index);
+
+
 
             children = childrenNew;
 
@@ -51,14 +55,6 @@ public class Family {
         }
     }
 
-//    public boolean deleteChild(int index) {
-//        if (children[index] == null) {
-//            return false;
-//        } else {
-//            children[index] = null;
-//            return true;
-//        }
-//    }
 
     private int findNextFreeCell() {
         for (int i = children.length - 1; i >= 0; i--) {
@@ -112,6 +108,11 @@ public class Family {
                 "children= " + Arrays.toString(children) + "\n" +
                 "pet= " + pet +
                 "}\n ";
+    }
+
+    @Override
+    protected void finalize() {
+        System.out.println("Deleting an instance of Family");
     }
 }
 

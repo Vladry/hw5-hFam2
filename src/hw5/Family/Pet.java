@@ -1,10 +1,10 @@
-package hw4.Family;
+package hw5.Family;
 
 import java.util.Arrays;
 
 public class Pet {
 
-    private String species;
+    private Species species;
     private String nickname;
     private int age;
     private int trickLevel; //from 0 to 100
@@ -21,12 +21,12 @@ public class Pet {
     Pet() {
     }
 
-    Pet(String species, String nickname) {
+    Pet(Species species, String nickname) {
         this.species = species;
         this.nickname = nickname;
     }
 
-    Pet(String species, String nickname, int age, int trickLevel) {
+    Pet(Species species, String nickname, int age, int trickLevel) {
         this(species, nickname);
         this.age = age;
         this.trickLevel = trickLevel;
@@ -45,42 +45,30 @@ public class Pet {
         System.out.println("Нужно хорошо замести следы...");
     }
 
-
-    public String getSpecies() {
+    public Species getSpecies() {
         return species;
     }
 
-    ;
-
-    public void setSpecies(String species) {
+    public void setSpecies(Species species) {
         this.species = species;
     }
-
-    ;
 
     public String getNickname() {
         return nickname;
     }
 
-    ;
-
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
-
-    ;
 
     public int getAge() {
         return age;
     }
 
-    ;
 
     public void setAge(int age) {
         this.age = age;
     }
-
-    ;
 
     public int getTrickLevel() {
         return trickLevel;
@@ -94,13 +82,10 @@ public class Pet {
         return habits;
     }
 
-    ;
 
     public void setHabits(String[] habits) {
         this.habits = habits;
     }
-
-    ;
 
 
     @Override
@@ -109,6 +94,11 @@ public class Pet {
                 trickLevel +
                 "habits=" + Arrays.toString(getHabits()) +
                 "}\n";
+    }
+
+    @Override
+    protected void finalize() {
+        System.out.println("Deleting an instance of Pet");
     }
 }
 

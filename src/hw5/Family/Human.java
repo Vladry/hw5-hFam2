@@ -1,4 +1,4 @@
-package hw4.Family;
+package hw5.Family;
 
 import java.util.Arrays;
 
@@ -16,14 +16,14 @@ public class Human {
 
     {
         schedule = new String[7][2];
-        schedule[0][0] = "sunday";
-        schedule[1][0] = "monday";
-        schedule[3][0] = "tuesday";
-        schedule[2][0] = "wednesday";
-        schedule[4][0] = "thursday";
-        schedule[5][0] = "friday";
-        schedule[6][0] = "saturday";
-        System.out.println("создается новый объект Human");
+        schedule[0][0] = DayOfWeek.SUNDAY.name().toLowerCase();
+        schedule[1][0] = DayOfWeek.MONDAY.name().toLowerCase();
+        schedule[3][0] = DayOfWeek.TUESDAY.name().toLowerCase();
+        schedule[2][0] = DayOfWeek.WEDNESDAY.name().toLowerCase();
+        schedule[4][0] = DayOfWeek.THURSDAY.name().toLowerCase();
+        schedule[5][0] = DayOfWeek.FRIDAY.name().toLowerCase();
+        schedule[6][0] = DayOfWeek.SATURDAY.name().toLowerCase();
+//        System.out.println("создается новый объект Human");
     }
 
     Human() {
@@ -136,7 +136,6 @@ public class Human {
         this.family = family;
     }
 
-    ;
 
     @Override
     public String toString() {
@@ -146,4 +145,8 @@ public class Human {
                 ", schedule=" + Arrays.deepToString(this.getSchedule()) +
                 "} \n ";
     }
-};
+    @Override
+ protected void finalize(){
+        System.out.println("Deleting an instance of Human");
+    }
+}
