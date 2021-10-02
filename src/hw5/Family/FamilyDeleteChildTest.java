@@ -2,10 +2,12 @@ package hw5.Family;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
 
-public class FamilyDeleteChildTest1 {
+public class FamilyDeleteChildTest {
     Family module;
     Human kid1, kid2,kid3,kid4,kid5,kid6;
     String[][] schedule = new String[7][2];
@@ -13,9 +15,9 @@ public class FamilyDeleteChildTest1 {
     @Before
     public void setUp() {
         schedule[0][0] = DayOfWeek.SUNDAY.name().toLowerCase();
-        schedule[0][0] = "First day born";
+        schedule[0][1] = "First day born";
         schedule[1][0] = DayOfWeek.MONDAY.name().toLowerCase();
-        schedule[1][0] = "Second day born";
+        schedule[1][1] = "Second day born";
         module = new Family(new Human("Mother", "Ryab", 1960),
                 new Human("Father", "Ryab", 1960)
         );
@@ -40,15 +42,24 @@ public class FamilyDeleteChildTest1 {
     }
 
     @Test
-    public void testDeleteChild() {
-        System.out.println(Arrays.toString(module.getChildren()));
-        boolean isDeleted = module.deleteChild(2);
+    public void testDeleteChildSuccess() {
+//        System.out.println(Arrays.toString(module.getChildren()));
+        boolean isDeleted = module.deleteChild(1);
         Human[] freshChildren = module.getChildren();
         boolean remainedFirstElem = freshChildren[0].getName().equals("Kid1");
-        boolean secondElemDeleted = freshChildren[1] == null;
+        boolean secondElemDeleted = !freshChildren[1].toString().equals("Kid2");
         boolean testResult = isDeleted && remainedFirstElem && secondElemDeleted;
-        System.out.println(Arrays.toString(module.getChildren()));
+//        System.out.println(Arrays.toString(module.getChildren()));
         assertTrue(testResult);
+    }
+
+    @Test
+    public void testDeleteChildUnsuccess() {
+        int arrInitLength = module.getChildren().length;
+        module.deleteChild(56);
+        module.deleteChild(-1);
+        int arrFinalLength = module.getChildren().length;
+        assertEquals(arrInitLength, arrFinalLength);
     }
 
 }

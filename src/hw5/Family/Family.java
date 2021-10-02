@@ -35,17 +35,15 @@ public class Family {
     }
 
     public boolean deleteChild(int index) {
-        if (index >= children.length || children[index] == null) {
+        if (index < 0 || index >= children.length || children[index] == null ) {
             return false;
-        } else {
-            System.arraycopy(children, index + 1, children, index, children.length - 1 - index);
-            Human[] newChildren = new Human[children.length - 1];
-            newChildren = children;
-            children = null;
-            children = newChildren;
-
-            return true;
         }
+        System.arraycopy(children, index + 1, children, index, children.length - 1 - index);
+        Human[] newChildren = new Human[children.length - 1];
+        System.arraycopy(children, 0, newChildren, 0, children.length - 1);
+        children = newChildren;
+        return true;
+
     }
 
 
